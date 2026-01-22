@@ -9,6 +9,15 @@
     --font-sans:
         "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
         "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono:
+        ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    
+    --color-gray-100: #F5F5F5;
+    --color-gray-200: #E5E5E5;
+    --color-gray-300: #CCCCCC;
+    --color-gray-400: #999999;
+    --color-gray-500: #666666;
+    --color-gray-600: #333333;
 }
 
 /* Custom Styles */

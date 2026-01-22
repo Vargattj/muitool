@@ -1,39 +1,47 @@
-<header class="bg-white border-b border-gray-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-            <!-- Logo -->
-            <div class="flex-shrink-0">
-                <a href="{{ route('home') }}" class="text-2xl font-bold text-gray-900 hover:text-gray-700 transition-colors">
-                    MuiTool
-                </a>
-            </div>
-
-            <!-- Navigation -->
-            <nav class="hidden md:flex space-x-8">
-                <a href="{{ route('home') }}" class="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors">
-                    {{ __('common.home') }}
-                </a>
-                <a href="{{ route('home') }}#categories" class="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors">
-                    {{ __('common.categories') }}
-                </a>
-            </nav>
-
-            <!-- Language Selector -->
-            <div class="flex items-center space-x-4">
-                <div class="relative group">
-                    <button class="flex items-center space-x-2 text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
-                        </svg>
-                        <span>{{ strtoupper(app()->getLocale()) }}</span>
-                    </button>
-                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
-                        <a href="{{ url('en' . request()->getPathInfo()) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-t-lg">English</a>
-                        <a href="{{ url('pt_BR' . request()->getPathInfo()) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Português (BR)</a>
-                        <a href="{{ url('es' . request()->getPathInfo()) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-b-lg">Español</a>
-                    </div>
+<nav class="border-b border-gray-200 bg-white sticky top-0 z-50 backdrop-blur-sm">
+    <div class="px-[120px] py-5 flex items-center justify-between max-lg:px-10 max-md:px-6">
+        <a class="flex items-center gap-3" href="{{ route('home') }}">
+            @if(file_exists(public_path('muitool.png')))
+                <img alt="MuiTool" class="h-8 w-8 object-contain" src="{{ asset('muitool.png') }}">
+            @endif
+            <span class="font-mono text-base font-semibold text-gray-900">MuiTool</span>
+        </a>
+        
+        <div class="flex items-center gap-10 max-md:hidden">
+            <a class="text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap" href="{{ route('home') }}">
+                {{ __('common.tools') }}
+            </a>
+            <a class="text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap" href="{{ route('home') }}#categories">
+                {{ __('common.categories') }}
+            </a>
+            <a class="text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap" href="#">
+                {{ __('common.documentation') }}
+            </a>
+            <a class="text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap" href="#">
+                {{ __('common.api') }}
+            </a>
+            <div class="relative" id="language-selector">
+                <button onclick="toggleLanguageMenu()" class="text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap flex items-center gap-1" id="language-button">
+                    <i class="ri-global-line"></i>
+                    <span>{{ strtoupper(app()->getLocale()) }}</span>
+                    <i class="ri-arrow-down-s-line text-xs" id="language-arrow"></i>
+                </button>
+                <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 hidden transition-all duration-200 z-10" id="language-menu">
+                    <a href="{{ url('en' . request()->getPathInfo()) }}" class="block px-4 py-2 text-sm text-gray-500 hover:text-gray-900 hover:bg-gray-50 rounded-t-lg transition-colors">
+                        English
+                    </a>
+                    <a href="{{ url('pt_BR' . request()->getPathInfo()) }}" class="block px-4 py-2 text-sm text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-colors">
+                        Português (BR)
+                    </a>
+                    <a href="{{ url('es' . request()->getPathInfo()) }}" class="block px-4 py-2 text-sm text-gray-500 hover:text-gray-900 hover:bg-gray-50 rounded-b-lg transition-colors">
+                        Español
+                    </a>
                 </div>
             </div>
         </div>
+        
+        <button class="hidden max-md:block text-gray-600 cursor-pointer" id="mobile-menu-button">
+            <i class="ri-menu-line text-xl"></i>
+        </button>
     </div>
-</header>
+</nav>

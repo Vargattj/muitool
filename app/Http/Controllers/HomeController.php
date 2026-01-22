@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Tool;
 use Illuminate\View\View;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\OpenGraph;
@@ -29,10 +30,22 @@ class HomeController extends Controller
         ->ordered()
         ->get();
 
+        // Get all active tools with their translations
+        $tools = Tool::with([
+            'category.translations' => function ($query) {
+                $query->where('locale', app()->getLocale());
+            },
+            'translations' => function ($query) {
+                $query->where('locale', app()->getLocale());
+            }
+        ])
+        ->active()
+        ->get();
+
         // Set SEO meta tags
         $this->setSeoTags();
 
-        return view('home', compact('categories'));
+        return view('home', compact('categories', 'tools'));
     }
 
     /**

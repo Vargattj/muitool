@@ -37,10 +37,22 @@ class ToolController extends Controller
             abort(404);
         }
 
+        // Get related tools (from the same category, excluding current tool)
+        $relatedTools = Tool::with([
+            'translations' => function ($query) {
+                $query->where('locale', app()->getLocale());
+            }
+        ])
+        ->where('category_id', $tool->category_id)
+        ->where('id', '!=', $tool->id)
+        ->active()
+        ->limit(5)
+        ->get();
+
         // Set SEO tags
         $this->setSeoTags($tool, $translation);
 
-        return view('tools.show', compact('tool', 'translation'));
+        return view('tools.show', compact('tool', 'translation', 'relatedTools'));
     }
 
     /**

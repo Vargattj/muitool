@@ -3,7 +3,9 @@
 return [
     'home' => [
         'title' => 'MuiTool - Ferramentas Online para Profissionais de Tecnologia',
-        'description' => 'Ferramentas online gratuitas para desenvolvedores e profissionais de tecnologia. Formatadores JSON, conversores, validadores e muito mais.',
+        'title_main' => 'Ferramentas Profissionais',
+        'subtitle' => 'para Desenvolvedores',
+        'description' => 'Uma coleção curada de utilitários essenciais para desenvolvimento moderno. Formate, converta, gere e transforme com precisão e velocidade.',
         'keywords' => 'ferramentas online, ferramentas para desenvolvedores, formatador json, ferramentas de texto, conversores, validadores',
     ],
 ];

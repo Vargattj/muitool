@@ -1,58 +1,73 @@
-<footer class="bg-white border-t border-gray-200 mt-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- About -->
+<footer class="bg-gray-50 border-t border-gray-200">
+    <div class="px-[120px] py-20 max-lg:px-10 max-md:px-6">
+        <div class="grid grid-cols-4 gap-12 mb-16 max-lg:grid-cols-2 max-md:grid-cols-1">
             <div>
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">MuiTool</h3>
-                <p class="text-gray-600 text-sm">
+                <div class="flex items-center gap-3 mb-4">
+                    @if(file_exists(public_path('muitool.png')))
+                        <img alt="MuiTool" class="h-6 w-6 object-contain" src="{{ asset('muitool.png') }}">
+                    @endif
+                    <span class="font-mono text-base font-semibold text-gray-900">MuiTool</span>
+                </div>
+                <p class="text-sm text-gray-500 leading-relaxed">
                     {{ __('seo.home.description') }}
                 </p>
             </div>
-
-            <!-- Quick Links -->
+            
             <div>
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('common.tools') }}</h3>
-                <ul class="space-y-2">
-                    <li>
-                        <a href="{{ route('home') }}" class="text-gray-600 hover:text-gray-900 text-sm transition-colors">
-                            {{ __('common.home') }}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('home') }}#categories" class="text-gray-600 hover:text-gray-900 text-sm transition-colors">
-                            {{ __('common.categories') }}
-                        </a>
-                    </li>
-                </ul>
+                <h4 class="text-sm font-semibold text-gray-900 mb-4">{{ __('common.browse_tools') }}</h4>
+                <div class="space-y-3">
+                    <a class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap" href="{{ route('home') }}">
+                        {{ __('common.home') }}
+                    </a>
+                    <a class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap" href="{{ route('home') }}#categories">
+                        {{ __('common.categories') }}
+                    </a>
+                </div>
             </div>
-
-            <!-- Languages -->
+            
             <div>
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('common.language') }}</h3>
-                <ul class="space-y-2">
-                    <li>
-                        <a href="{{ url('en' . request()->getPathInfo()) }}" class="text-gray-600 hover:text-gray-900 text-sm transition-colors">
-                            English
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ url('pt_BR' . request()->getPathInfo()) }}" class="text-gray-600 hover:text-gray-900 text-sm transition-colors">
-                            Português (BR)
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ url('es' . request()->getPathInfo()) }}" class="text-gray-600 hover:text-gray-900 text-sm transition-colors">
-                            Español
-                        </a>
-                    </li>
-                </ul>
+                <h4 class="text-sm font-semibold text-gray-900 mb-4">{{ __('common.resources') }}</h4>
+                <div class="space-y-3">
+                    <a href="#" class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap">
+                        {{ __('common.documentation') }}
+                    </a>
+                    <a href="#" class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap">
+                        {{ __('common.api') }}
+                    </a>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="text-sm font-semibold text-gray-900 mb-4">{{ __('common.language') }}</h4>
+                <div class="space-y-3">
+                    <a href="{{ url('en' . request()->getPathInfo()) }}" class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap">
+                        English
+                    </a>
+                    <a href="{{ url('pt_BR' . request()->getPathInfo()) }}" class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap">
+                        Português (BR)
+                    </a>
+                    <a href="{{ url('es' . request()->getPathInfo()) }}" class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap">
+                        Español
+                    </a>
+                </div>
             </div>
         </div>
-
-        <div class="border-t border-gray-200 mt-8 pt-8 text-center">
-            <p class="text-gray-600 text-sm">
+        
+        <div class="pt-8 border-t border-gray-200 flex items-center justify-between max-md:flex-col max-md:gap-4">
+            <p class="text-xs text-gray-400">
                 © {{ date('Y') }} MuiTool. {{ __('common.all_rights_reserved') }}
             </p>
+            <div class="flex items-center gap-4">
+                <a href="#" class="text-gray-500 hover:text-gray-900 transition-colors cursor-pointer">
+                    <i class="ri-github-fill text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-gray-900 transition-colors cursor-pointer">
+                    <i class="ri-twitter-x-fill text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-gray-900 transition-colors cursor-pointer">
+                    <i class="ri-linkedin-fill text-xl"></i>
+                </a>
+            </div>
         </div>
     </div>
 </footer>
