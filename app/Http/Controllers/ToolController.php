@@ -174,7 +174,6 @@ class ToolController extends Controller
                 'item' => url()->current(),
             ],
         ]);
-        JsonLdMulti::addJsonLd($breadcrumb);
 
         // 3. FAQPage (if present)
         if ($translation->faq && count($translation->faq) > 0) {
@@ -192,7 +191,6 @@ class ToolController extends Controller
                 ];
             }
             $faq->addValue('mainEntity', $faqItems);
-            JsonLdMulti::addJsonLd($faq);
         }
     }
 }

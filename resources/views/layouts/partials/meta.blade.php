@@ -2,4 +2,5 @@
 {!! OpenGraph::generate() !!}
 {!! Twitter::generate() !!}
 {!! JsonLd::generate() !!}
-{!! JsonLdMulti::generate() !!}
+{!! \Artesaos\SEOTools\Facades\JsonLdMulti::generate() !!}
+
