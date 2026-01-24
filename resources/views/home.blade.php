@@ -57,7 +57,7 @@
                 @endphp
                 
                 @if($toolTranslation)
-                    <a href="{{ route('tools.show', ['slug' => $tool->slug]) }}" 
+                    <a href="{{ localized_route('tools.show', ['slug' => $tool->slug]) }}" 
                        class="bg-white border border-gray-200 rounded-lg p-6 hover:border-gray-600 hover:shadow-lg transition-all duration-200 group">
                         <div class="flex items-start gap-4">
                             @if($tool->icon)

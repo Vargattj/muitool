@@ -16,16 +16,16 @@
             <div>
                 <h4 class="text-sm font-semibold text-gray-900 mb-4">{{ __('common.browse_tools') }}</h4>
                 <div class="space-y-3">
-                    <a class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap" href="{{ route('home') }}">
+                    <a class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap" href="{{ localized_route('home') }}">
                         {{ __('common.home') }}
                     </a>
-                    <a class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap" href="{{ route('home') }}#categories">
+                    <a class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap" href="{{ localized_route('home') }}#categories">
                         {{ __('common.categories') }}
                     </a>
                 </div>
             </div>
             
-            <div>
+            <!-- <div>
                 <h4 class="text-sm font-semibold text-gray-900 mb-4">{{ __('common.resources') }}</h4>
                 <div class="space-y-3">
                     <a href="#" class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap">
@@ -35,18 +35,18 @@
                         {{ __('common.api') }}
                     </a>
                 </div>
-            </div>
+            </div> -->
             
             <div>
                 <h4 class="text-sm font-semibold text-gray-900 mb-4">{{ __('common.language') }}</h4>
                 <div class="space-y-3">
-                    <a href="{{ url('en' . request()->getPathInfo()) }}" class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap">
+                    <a href="{{ switch_locale_url('en') }}" class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap">
                         English
                     </a>
-                    <a href="{{ url('pt_BR' . request()->getPathInfo()) }}" class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap">
+                    <a href="{{ switch_locale_url('pt_BR') }}" class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap">
                         Português (BR)
                     </a>
-                    <a href="{{ url('es' . request()->getPathInfo()) }}" class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap">
+                    <a href="{{ switch_locale_url('es') }}" class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap">
                         Español
                     </a>
                 </div>

@@ -34,10 +34,19 @@ class SetLocale
 
         // Check if the locale is valid
         if (in_array($locale, $this->availableLocales)) {
+            // Save locale to session
+            session(['locale' => $locale]);
             app()->setLocale($locale);
         } else {
-            // Set default locale if not found in URL
-            app()->setLocale($this->defaultLocale);
+            // Try to get locale from session
+            $sessionLocale = session('locale');
+            
+            if ($sessionLocale && in_array($sessionLocale, $this->availableLocales)) {
+                app()->setLocale($sessionLocale);
+            } else {
+                // Set default locale if not found in URL or session
+                app()->setLocale($this->defaultLocale);
+            }
         }
 
         return $next($request);

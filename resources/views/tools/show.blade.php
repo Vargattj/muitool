@@ -6,7 +6,7 @@
     <section class="px-[120px] py-6 max-lg:px-10 max-md:px-6">
         <div class="mx-auto">
             <nav class="flex items-center gap-2 text-sm text-[#666666]">
-                <a href="{{ route('home') }}" class="hover:text-black transition-colors">
+                <a href="{{ localized_route('home') }}" class="hover:text-black transition-colors">
                     {{ __('common.home') }}
                 </a>
                 <span>/</span>
@@ -14,7 +14,7 @@
                     $categoryTranslation = $tool->category->translation();
                 @endphp
                 @if($categoryTranslation)
-                    <a href="{{ route('home') }}#categories" class="hover:text-black transition-colors">
+                    <a href="{{ localized_route('home') }}#categories" class="hover:text-black transition-colors">
                         {{ $categoryTranslation->name }}
                     </a>
                     <span>/</span>
@@ -46,7 +46,7 @@
                                     $relatedTranslation = $relatedTool->translation();
                                 @endphp
                                 @if($relatedTranslation)
-                                    <a href="{{ route('tools.show', ['slug' => $relatedTool->slug]) }}" 
+                                    <a href="{{ localized_route('tools.show', ['slug' => $relatedTool->slug]) }}" 
                                        class="flex items-center justify-between h-10 px-3 text-sm text-[#333333] hover:bg-[#F5F5F5] rounded transition-colors cursor-pointer group">
                                         <span>{{ $relatedTranslation->name }}</span>
                                         <i class="ri-arrow-right-line text-[#999999] group-hover:text-[#333333] transition-colors"></i>

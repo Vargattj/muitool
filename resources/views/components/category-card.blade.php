@@ -14,7 +14,7 @@
     $iconClass = $iconMap[$category->slug] ?? 'ri-tools-line';
     $toolCount = $category->tools->count();
     $firstTool = $category->tools->first();
-    $categoryUrl = $firstTool ? route('tools.show', ['slug' => $firstTool->slug]) : route('home') . '#categories';
+    $categoryUrl = $firstTool ? localized_route('tools.show', ['slug' => $firstTool->slug]) : localized_route('home') . '#categories';
 @endphp
 
 <a href="{{ $categoryUrl }}" class="aspect-square bg-white border border-gray-200 rounded-lg p-12 flex flex-col items-center justify-center text-center transition-all duration-200 hover:border-gray-600 hover:-translate-y-1 cursor-pointer group">

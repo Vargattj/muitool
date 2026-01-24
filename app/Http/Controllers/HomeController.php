@@ -14,7 +14,7 @@ class HomeController extends Controller
     /**
      * Display the homepage.
      */
-    public function index(): View
+    public function index(?string $locale = null): View
     {
         // Get active categories with their tools and translations
         $categories = Category::with([
@@ -71,9 +71,14 @@ class HomeController extends Controller
         TwitterCard::setDescription(__('seo.home.description'));
         TwitterCard::setImage(asset('images/og-image.jpg'));
 
-        // Add alternate language tags
+        // Add alternate language tags (hreflang) for SEO
         foreach (['en', 'pt_BR', 'es'] as $lang) {
-            SEOMeta::addAlternateLanguage($lang, url($lang));
+            if ($lang === 'en') {
+                $url = route('home');
+            } else {
+                $url = route('home.locale', ['locale' => $lang]);
+            }
+            SEOMeta::addAlternateLanguage($lang, $url);
         }
     }
 }
