@@ -32,8 +32,9 @@ class GenerateSitemap extends Command
 
         // Add homepage for each locale
         foreach (['en', 'pt_BR', 'es'] as $locale) {
+            $url = ($locale === 'en') ? route('home') : route('home.locale', ['locale' => $locale]);
             $sitemap->add(
-                Url::create(url($locale))
+                Url::create($url)
                     ->setLastModificationDate(now())
                     ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
                     ->setPriority(1.0)
@@ -45,14 +46,21 @@ class GenerateSitemap extends Command
         
         foreach ($tools as $tool) {
             foreach (['en', 'pt_BR', 'es'] as $locale) {
+                if ($locale === 'en') {
+                    $url = route('tools.show', ['slug' => $tool->slug]);
+                } else {
+                    $url = route('tools.show.locale', ['locale' => $locale, 'slug' => $tool->slug]);
+                }
+
                 $sitemap->add(
-                    Url::create(url($locale . '/tools/' . $tool->slug))
+                    Url::create($url)
                         ->setLastModificationDate($tool->updated_at)
                         ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
                         ->setPriority(0.8)
                 );
             }
         }
+
 
         $sitemap->writeToFile(public_path('sitemap.xml'));
 

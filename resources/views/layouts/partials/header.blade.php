@@ -1,5 +1,5 @@
-<nav class="border-b border-gray-200 bg-white sticky top-0 z-50 backdrop-blur-sm">
-    <div class="px-[120px] py-5 flex items-center justify-between max-lg:px-10 max-md:px-6">
+<header class="border-b border-gray-200 bg-white sticky top-0 z-50 backdrop-blur-sm">
+    <nav class="px-[120px] py-5 flex items-center justify-between max-lg:px-10 max-md:px-6">
         <a class="flex items-center gap-3" href="{{ localized_route('home') }}">
             @if(file_exists(public_path('muitool.png')))
                 <img alt="MuiTool" class="h-8 w-8 object-contain" src="{{ asset('muitool.png') }}">
@@ -38,5 +38,6 @@
         <button class="hidden max-md:block text-gray-600 cursor-pointer" id="mobile-menu-button">
             <i class="ri-menu-line text-xl"></i>
         </button>
-    </div>
-</nav>
+    </nav>
+</header>
+

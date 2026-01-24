@@ -17,9 +17,10 @@
 <body class="antialiased bg-white min-h-screen">
     @include('layouts.partials.header')
 
-    <main>
+    <main id="main-content">
         @yield('content')
     </main>
+
 
     @include('layouts.partials.footer')
 

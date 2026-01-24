@@ -64,14 +64,22 @@ class HomeController extends Controller
         OpenGraph::setDescription(__('seo.home.description'));
         OpenGraph::setUrl(url()->current());
         OpenGraph::setType('website');
-        OpenGraph::addImage(asset('images/og-image.jpg'));
+        $ogImage = file_exists(public_path('images/og-image.jpg')) 
+            ? asset('images/og-image.jpg') 
+            : (file_exists(public_path('muitool.png')) ? asset('muitool.png') : null);
+
+        if ($ogImage) {
+            OpenGraph::addImage($ogImage);
+            TwitterCard::setImage($ogImage);
+        }
 
         TwitterCard::setType('summary_large_image');
         TwitterCard::setTitle(__('seo.home.title'));
         TwitterCard::setDescription(__('seo.home.description'));
-        TwitterCard::setImage(asset('images/og-image.jpg'));
+
 
         // Add alternate language tags (hreflang) for SEO
+        SEOMeta::addAlternateLanguage('x-default', route('home'));
         foreach (['en', 'pt_BR', 'es'] as $lang) {
             if ($lang === 'en') {
                 $url = route('home');
@@ -80,5 +88,6 @@ class HomeController extends Controller
             }
             SEOMeta::addAlternateLanguage($lang, $url);
         }
+
     }
 }

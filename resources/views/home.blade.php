@@ -28,7 +28,9 @@
 <!-- Categories Section -->
 <section id="categories" class="px-[120px] pb-40 max-lg:px-10 max-md:px-6 max-md:pb-24">
     <div class="mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-12">{{ __('common.categories') }}</h2>
         <div class="grid grid-cols-4 gap-8 max-xl:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1">
+
             @foreach($categories as $category)
                 @php
                     $translation = $category->translation();

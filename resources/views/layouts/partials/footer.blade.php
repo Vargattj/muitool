@@ -15,42 +15,45 @@
             
             <div>
                 <h4 class="text-sm font-semibold text-gray-900 mb-4">{{ __('common.browse_tools') }}</h4>
-                <div class="space-y-3">
-                    <a class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap" href="{{ localized_route('home') }}">
-                        {{ __('common.home') }}
-                    </a>
-                    <a class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap" href="{{ localized_route('home') }}#categories">
-                        {{ __('common.categories') }}
-                    </a>
-                </div>
+                <nav aria-label="{{ __('common.browse_tools') }}">
+                    <ul class="space-y-3">
+                        <li>
+                            <a class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap" href="{{ localized_route('home') }}">
+                                {{ __('common.home') }}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap" href="{{ localized_route('home') }}#categories">
+                                {{ __('common.categories') }}
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
-            
-            <!-- <div>
-                <h4 class="text-sm font-semibold text-gray-900 mb-4">{{ __('common.resources') }}</h4>
-                <div class="space-y-3">
-                    <a href="#" class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap">
-                        {{ __('common.documentation') }}
-                    </a>
-                    <a href="#" class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap">
-                        {{ __('common.api') }}
-                    </a>
-                </div>
-            </div> -->
             
             <div>
                 <h4 class="text-sm font-semibold text-gray-900 mb-4">{{ __('common.language') }}</h4>
-                <div class="space-y-3">
-                    <a href="{{ switch_locale_url('en') }}" class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap">
-                        English
-                    </a>
-                    <a href="{{ switch_locale_url('pt_BR') }}" class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap">
-                        Português (BR)
-                    </a>
-                    <a href="{{ switch_locale_url('es') }}" class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap">
-                        Español
-                    </a>
-                </div>
+                <nav aria-label="{{ __('common.language') }}">
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="{{ switch_locale_url('en') }}" class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap">
+                                English
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ switch_locale_url('pt_BR') }}" class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap">
+                                Português (BR)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ switch_locale_url('es') }}" class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap">
+                                Español
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
+
         </div>
         
         <div class="pt-8 border-t border-gray-200 flex items-center justify-between max-md:flex-col max-md:gap-4">

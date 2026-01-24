@@ -9,6 +9,7 @@ use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\TwitterCard;
 use Artesaos\SEOTools\Facades\JsonLd;
+use Artesaos\SEOTools\Facades\JsonLdMulti;
 
 class ToolController extends Controller
 {
@@ -121,7 +122,24 @@ class ToolController extends Controller
             TwitterCard::setImage(asset($tool->icon));
         }
 
-        // Add JSON-LD structured data for SoftwareApplication
+        // Add alternate language tags (hreflang) for SEO
+        SEOMeta::addAlternateLanguage('x-default', route('tools.show', ['slug' => $tool->slug]));
+        foreach (['en', 'pt_BR', 'es'] as $lang) {
+            $langTranslation = $tool->translation($lang);
+            if ($langTranslation) {
+                if ($lang === 'en') {
+                    $altUrl = route('tools.show', ['slug' => $tool->slug]);
+                } else {
+                    $altUrl = route('tools.show.locale', ['locale' => $lang, 'slug' => $tool->slug]);
+                }
+                SEOMeta::addAlternateLanguage($lang, $altUrl);
+            }
+        }
+
+        // --- Structured Data (JSON-LD) ---
+
+        
+        // 1. SoftwareApplication
         JsonLd::setType('SoftwareApplication');
         JsonLd::setTitle($translation->name);
         JsonLd::setDescription($description);
@@ -133,18 +151,48 @@ class ToolController extends Controller
             'priceCurrency' => 'USD',
         ]);
 
-        // Add alternate language tags (hreflang) for SEO
-        foreach (['en', 'pt_BR', 'es'] as $lang) {
-            // Check if translation exists for this language
-            $langTranslation = $tool->translation($lang);
-            if ($langTranslation) {
-                if ($lang === 'en') {
-                    $url = route('tools.show', ['slug' => $tool->slug]);
-                } else {
-                    $url = route('tools.show.locale', ['locale' => $lang, 'slug' => $tool->slug]);
-                }
-                SEOMeta::addAlternateLanguage($lang, $url);
+        // 2. BreadcrumbList
+        $breadcrumb = JsonLdMulti::newJsonLd();
+        $breadcrumb->setType('BreadcrumbList');
+        $breadcrumb->addValue('itemListElement', [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => __('common.home'),
+                'item' => route('home'),
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => $tool->category->translation($currentLocale)->name ?? 'Category',
+                'item' => route('home') . '#categories',
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 3,
+                'name' => $translation->name,
+                'item' => url()->current(),
+            ],
+        ]);
+        JsonLdMulti::addJsonLd($breadcrumb);
+
+        // 3. FAQPage (if present)
+        if ($translation->faq && count($translation->faq) > 0) {
+            $faq = JsonLdMulti::newJsonLd();
+            $faq->setType('FAQPage');
+            $faqItems = [];
+            foreach ($translation->faq as $item) {
+                $faqItems[] = [
+                    '@type' => 'Question',
+                    'name' => $item['question'],
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => $item['answer']
+                    ]
+                ];
             }
+            $faq->addValue('mainEntity', $faqItems);
+            JsonLdMulti::addJsonLd($faq);
         }
     }
 }

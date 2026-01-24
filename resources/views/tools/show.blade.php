@@ -5,21 +5,29 @@
     <!-- Breadcrumbs -->
     <section class="px-[120px] py-6 max-lg:px-10 max-md:px-6">
         <div class="mx-auto">
-            <nav class="flex items-center gap-2 text-sm text-[#666666]">
-                <a href="{{ localized_route('home') }}" class="hover:text-black transition-colors">
-                    {{ __('common.home') }}
-                </a>
-                <span>/</span>
-                @php
-                    $categoryTranslation = $tool->category->translation();
-                @endphp
-                @if($categoryTranslation)
-                    <a href="{{ localized_route('home') }}#categories" class="hover:text-black transition-colors">
-                        {{ $categoryTranslation->name }}
-                    </a>
-                    <span>/</span>
-                @endif
-                <span class="text-black">{{ $translation->name }}</span>
+            <nav class="flex items-center gap-2 text-sm text-[#666666]" aria-label="Breadcrumb">
+                <ol class="flex items-center gap-2 list-none p-0 m-0">
+                    <li>
+                        <a href="{{ localized_route('home') }}" class="hover:text-black transition-colors">
+                            {{ __('common.home') }}
+                        </a>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span>/</span>
+                        @php
+                            $categoryTranslation = $tool->category->translation();
+                        @endphp
+                        @if($categoryTranslation)
+                            <a href="{{ localized_route('home') }}#categories" class="hover:text-black transition-colors">
+                                {{ $categoryTranslation->name }}
+                            </a>
+                        @endif
+                    </li>
+                    <li class="flex items-center gap-2" aria-current="page">
+                        <span>/</span>
+                        <span class="text-black">{{ $translation->name }}</span>
+                    </li>
+                </ol>
             </nav>
         </div>
     </section>
@@ -27,20 +35,27 @@
     <!-- Tool Component Section -->
     <section class="bg-[#F5F5F5] py-20 max-md:py-12">
         <div class="px-[120px] max-w-[1400px] mx-auto max-lg:px-10 max-md:px-6">
+            <div class="mb-10 text-center">
+                <h1 class="text-2xl font-bold text-black mb-4">{{ $translation->name }}</h1>
+                @if($translation->short_description)
+                    <p class="text-lg text-[#666666] max-w-2xl mx-auto">{{ $translation->short_description }}</p>
+                @endif
+            </div>
+
             <div class="flex gap-6 max-lg:flex-col">
                 <div class="flex-1">
-                    <div class="bg-white border-2 border-[#E5E5E5] rounded-xl p-12 max-md:p-6">
+                    <article class="bg-white border-2 border-[#E5E5E5] rounded-xl p-12 max-md:p-6">
                         <!-- Tool Component -->
                         @include('components.' . $tool->view_component)
-                    </div>
+                    </article>
                 </div>
                 
                 <!-- Related Tools Sidebar -->
                 @if($relatedTools->count() > 0)
-                <div class="w-[280px] max-lg:w-full">
+                <aside class="w-[280px] max-lg:w-full">
                     <div class="bg-white border border-[#E5E5E5] rounded-lg p-6 sticky top-24">
-                        <h3 class="text-sm font-bold text-black mb-5">{{ __('common.related_tools') }}</h3>
-                        <div class="space-y-1">
+                        <h2 class="text-sm font-bold text-black mb-5 uppercase tracking-wider">{{ __('common.related_tools') }}</h2>
+                        <nav class="space-y-1">
                             @foreach($relatedTools as $relatedTool)
                                 @php
                                     $relatedTranslation = $relatedTool->translation();
@@ -53,9 +68,9 @@
                                     </a>
                                 @endif
                             @endforeach
-                        </div>
+                        </nav>
                     </div>
-                </div>
+                </aside>
                 @endif
             </div>
         </div>
@@ -65,17 +80,17 @@
     @if($translation->faq && count($translation->faq) > 0)
     <section class="px-[120px] py-32 max-lg:px-10 max-md:px-6 max-md:py-20">
         <h2 class="text-[32px] font-bold text-black mb-12">{{ __('common.faq') }}</h2>
-        <div class="space-y-0">
+        <div class="space-y-4">
             @foreach($translation->faq as $item)
-            <div class="border-b border-[#E5E5E5]">
-                <button class="w-full py-6 flex items-center justify-between text-left cursor-pointer group" onclick="toggleFaq(this)">
-                    <h4 class="text-lg font-medium text-black pr-4">{{ $item['question'] }}</h4>
-                    <span class="text-2xl text-[#666666] group-hover:text-black transition-colors flex-shrink-0 faq-icon">+</span>
-                </button>
-                <div class="hidden faq-answer pb-6">
+            <details class="border-b border-[#E5E5E5] group" {{ $loop->first ? 'open' : '' }}>
+                <summary class="w-full py-6 flex items-center justify-between text-left cursor-pointer list-none">
+                    <h3 class="text-lg font-medium text-black pr-4">{{ $item['question'] }}</h3>
+                    <span class="text-2xl text-[#666666] group-open:rotate-45 transition-transform flex-shrink-0">+</span>
+                </summary>
+                <div class="pb-6">
                     <p class="text-base text-[#666666] leading-relaxed">{{ $item['answer'] }}</p>
                 </div>
-            </div>
+            </details>
             @endforeach
         </div>
     </section>
@@ -131,19 +146,5 @@
     </section>
     @endif
 </div>
-
-<script>
-function toggleFaq(button) {
-    const answer = button.nextElementSibling;
-    const icon = button.querySelector('.faq-icon');
-    
-    if (answer.classList.contains('hidden')) {
-        answer.classList.remove('hidden');
-        icon.textContent = '−';
-    } else {
-        answer.classList.add('hidden');
-        icon.textContent = '+';
-    }
-}
-</script>
 @endsection
+
