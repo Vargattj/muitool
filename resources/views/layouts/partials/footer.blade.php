@@ -27,6 +27,16 @@
                                 {{ __('common.categories') }}
                             </a>
                         </li>
+                        <li>
+                            <a class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap" href="{{ localized_route('about') }}">
+                                {{ __('pages.about') }}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="block text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap" href="{{ localized_route('contact') }}">
+                                {{ __('pages.contact') }}
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>

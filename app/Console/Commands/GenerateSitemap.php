@@ -41,6 +41,28 @@ class GenerateSitemap extends Command
             );
         }
 
+        // Add About page for each locale
+        foreach (['en', 'pt_BR', 'es'] as $locale) {
+            $url = ($locale === 'en') ? route('about') : route('about.locale', ['locale' => $locale]);
+            $sitemap->add(
+                Url::create($url)
+                    ->setLastModificationDate(now())
+                    ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+                    ->setPriority(0.7)
+            );
+        }
+
+        // Add Contact page for each locale
+        foreach (['en', 'pt_BR', 'es'] as $locale) {
+            $url = ($locale === 'en') ? route('contact') : route('contact.locale', ['locale' => $locale]);
+            $sitemap->add(
+                Url::create($url)
+                    ->setLastModificationDate(now())
+                    ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+                    ->setPriority(0.6)
+            );
+        }
+
         // Add all active tools for each locale
         $tools = Tool::active()->get();
         
@@ -60,6 +82,7 @@ class GenerateSitemap extends Command
                 );
             }
         }
+
 
 
         $sitemap->writeToFile(public_path('sitemap.xml'));

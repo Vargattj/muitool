@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ToolController;
+use App\Http\Controllers\PageController;
 use App\Http\Middleware\SetLocale;
 
 // Apply SetLocale middleware to all routes
@@ -14,6 +15,30 @@ Route::middleware([SetLocale::class])->group(function () {
     
     // Tool routes without locale
     Route::get('/tools/{slug}', [ToolController::class, 'show'])->name('tools.show');
+
+    // About routes with locale
+    Route::get('/{locale}/about', [PageController::class, 'about'])
+        ->where('locale', 'en|pt_BR|es')
+        ->name('about.locale');
+    
+    // About route without locale
+    Route::get('/about', [PageController::class, 'about'])->name('about');
+
+    // Contact routes with locale
+    Route::get('/{locale}/contact', [PageController::class, 'contact'])
+        ->where('locale', 'en|pt_BR|es')
+        ->name('contact.locale');
+    
+    // Contact route without locale
+    Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+
+    // Contact form submission with locale
+    Route::post('/{locale}/contact', [PageController::class, 'submitContact'])
+        ->where('locale', 'en|pt_BR|es')
+        ->name('contact.submit.locale');
+    
+    // Contact form submission without locale
+    Route::post('/contact', [PageController::class, 'submitContact'])->name('contact.submit');
 
     // Homepage routes with locale (more specific, must come after tools)
     Route::get('/{locale}', [HomeController::class, 'index'])

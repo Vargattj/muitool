@@ -14,6 +14,12 @@
             <a class="text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap" href="{{ localized_route('home') }}#categories">
                 {{ __('common.categories') }}
             </a>
+            <a class="text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap" href="{{ localized_route('about') }}">
+                {{ __('pages.about') }}
+            </a>
+            <a class="text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap" href="{{ localized_route('contact') }}">
+                {{ __('pages.contact') }}
+            </a>
       
             <div class="relative" id="language-selector">
                 <button onclick="toggleLanguageMenu()" class="text-sm text-gray-500 hover:text-gray-900 transition-colors cursor-pointer whitespace-nowrap flex items-center gap-1" id="language-button">
