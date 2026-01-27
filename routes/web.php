@@ -23,3 +23,11 @@ Route::middleware([SetLocale::class])->group(function () {
     // Homepage route without locale (must come last)
     Route::get('/', [HomeController::class, 'index'])->name('home');
 });
+
+// IndexNow Verification
+Route::get('/{key}.txt', function ($key) {
+    if ($key === config('services.indexnow.key')) {
+        return response($key)->header('Content-Type', 'text/plain');
+    }
+    abort(404);
+})->where('key', '[a-zA-Z0-9]+');
