@@ -1,6 +1,6 @@
 # MuiTool - Online Tool Platform
 
-A modern, multilingual online tool platform built with Laravel, designed for technology professionals. Features a minimalist design, comprehensive SEO optimization, and full internationalization support.
+A modern, multilingual online tool platform built with Laravel, designed for technology professionals. Features a minimalist design, comprehensive SEO optimization, and full internationalization support. V1 LARAVEL
 
 ## Features
 
@@ -32,51 +32,51 @@ A modern, multilingual online tool platform built with Laravel, designed for tec
 
 1. **Clone the repository**
 
-    ```bash
-    cd c:\Users\Varga\Herd\muitool
-    ```
+   ```bash
+   cd c:\Users\Varga\Herd\muitool
+   ```
 
 2. **Install PHP dependencies**
 
-    ```bash
-    composer install
-    ```
+   ```bash
+   composer install
+   ```
 
 3. **Install Node dependencies**
 
-    ```bash
-    npm install
-    ```
+   ```bash
+   npm install
+   ```
 
 4. **Configure environment**
 
-    ```bash
-    cp .env.example .env
-    php artisan key:generate
-    ```
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
 5. **Run migrations and seeders**
 
-    ```bash
-    php artisan migrate:fresh --seed
-    ```
+   ```bash
+   php artisan migrate:fresh --seed
+   ```
 
 6. **Build assets**
 
-    ```bash
-    npm run build
-    ```
+   ```bash
+   npm run build
+   ```
 
 7. **Generate sitemap**
 
-    ```bash
-    php artisan sitemap:generate
-    ```
+   ```bash
+   php artisan sitemap:generate
+   ```
 
 8. **Start development server**
-    ```bash
-    php artisan serve
-    ```
+   ```bash
+   php artisan serve
+   ```
 
 Visit `http://localhost:8000` to see the application.
 
@@ -251,11 +251,11 @@ php artisan sitemap:generate
 
 1. **Enable Caching**
 
-    ```bash
-    php artisan config:cache
-    php artisan route:cache
-    php artisan view:cache
-    ```
+   ```bash
+   php artisan config:cache
+   php artisan route:cache
+   php artisan view:cache
+   ```
 
 2. **Use Production Database**
    Update `.env` to use MySQL or PostgreSQL
